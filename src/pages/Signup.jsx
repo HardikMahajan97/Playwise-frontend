@@ -39,7 +39,7 @@ export default function Signup(){
             console.log(formdata);
         }catch(e){
 
-            alert("AN error occured. Retry or please wait while we solve it!"+e);
+            alert("An error occured. Retry or please wait while we solve it!"+e);
         }
 
     }
@@ -185,3 +185,4 @@ export default function Signup(){
         </>
     )
 }
+
