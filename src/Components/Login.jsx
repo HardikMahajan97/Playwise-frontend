@@ -1,5 +1,5 @@
-import {React, useState,useEffect} from "react";
-
+import {useState} from "react";
+import {Link} from "react-router-dom";
 
 export default function Login(){
 
@@ -27,14 +27,14 @@ export default function Login(){
 
             await response.json();
             if(response.ok){
-                alert("Login successfull");
+                alert("Logged in successfully");
                 // response.redirect("http://localhost:5000/listings");
             }else{
                 alert("Login failed");
             }
 
         }catch(err){
-            alert(`Some Error occurred ${err.message}`);
+            alert(`Some Error occurred. It says: ${err.message}`);
         }
     };
 
@@ -77,11 +77,21 @@ export default function Login(){
                                 placeholder="Enter Password"
                             />
                         </div>
+
                         <br/>
-                        <button type={"submit"} className={"border-1  w-1/2 h-10 border-amber-700 rounded-lg bg-gradient-to-r from-teal-400 to-lime-500 hover: from-emerald-500 to-lime-600 transition"}> Login </button>
+
+                        <button type={"submit"}
+                                className={"border-1  w-1/2 h-10 font-medium border-amber-700 rounded-lg bg-gradient-to-r from-teal-400 to-lime-500 hover:bg-gradient-to-bl transition"}> Login
+                        </button>
+
+                    {/*    Forgot Password*/}
+                        <br/>
+                        <div>
+                            <Link to="/forgot-password" className={"text-blue-800 hover:underline"}>Forgot Password?</Link>
+                        </div>
                     </form>
                 </main>
             </div>
         </>
-    )
+    );
 }
