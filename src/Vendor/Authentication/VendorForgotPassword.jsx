@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ForgotPassword() {
+export default function VendorForgotPassword() {
     const [contact, setContact] = useState("");
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ export default function ForgotPassword() {
                 contact: formattedNumber
             };
 
-            console.log('Sending request with number:', formattedNumber);
+            // console.log('Sending request with number:', formattedNumber);
 
             const response = await fetch(`http://localhost:5000/vendor/forgotPassword`, {
                 method: "POST",
@@ -46,15 +46,15 @@ export default function ForgotPassword() {
 
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('Server response:', errorText);
+                // console.error('Server response:', errorText);
                 throw new Error(`Server responded with status ${response.status}: ${errorText}`);
             }
 
             const data = await response.json();
-            console.log('Server response:', data);
-
+            // console.log('Server response:', data);
+            navigate("/vendor/otp-form");
             alert('OTP sent successfully to your contact!');
-            // navigate("/otp-form");
+
         } catch (error) {
             console.error('Error details:', error);
             alert(`Error occurred: ${error.message}`);
@@ -102,7 +102,7 @@ export default function ForgotPassword() {
                                  transition-colors duration-200
                                  focus:outline-none focus:ring-2 focus:ring-gray-500"
                     >
-                        Verify
+                        Send OTP
                     </button>
                 </form>
             </section>

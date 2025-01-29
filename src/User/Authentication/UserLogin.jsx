@@ -1,23 +1,25 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-export default function Login(){
+export default function VendorLogin(){
 
     const [form, setFormData] = useState({
         username : '',
         password : '',
     });
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const {id, value} = e.target;
         setFormData((prev) => ({
             ...prev,
-                [id] : value,
+            [id] : value,
         }));
     }
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
-            const response = await fetch("http://localhost:5000/vendor/login", {
+            console.log("Print something dammit!");
+            const response = await fetch("http://localhost:5000/user/login", {
                 method:"POST",
                 headers:{
                     'Content-Type': 'application/json',
@@ -25,12 +27,14 @@ export default function Login(){
                 body:JSON.stringify(form),
             });
 
-            await response.json();
+            const user = await response.json();
+            console.log(`This is user id fetched from the server ${user.id}`);
             if(response.ok){
-                alert("Logged in successfully");
-                // response.redirect("http://localhost:5000/listings");
+                alert("User logged in successfully");
+                navigate(`/user/home-page/${user.id}`);
+
             }else{
-                alert("Login failed");
+                alert("User login failed");
             }
 
         }catch(err){
@@ -84,10 +88,10 @@ export default function Login(){
                                 className={"border-1  w-1/2 h-10 font-medium border-amber-700 rounded-lg bg-gradient-to-r from-teal-400 to-lime-500 hover:bg-gradient-to-bl transition"}> Login
                         </button>
 
-                    {/*    Forgot Password*/}
+                        {/*    Forgot Password*/}
                         <br/>
                         <div>
-                            <Link to="/forgot-password" className={"text-blue-800 hover:underline"}>Forgot Password?</Link>
+                            <Link to="/user/forgot-password" className={"text-blue-800 hover:underline"}>Forgot Password?</Link>
                         </div>
                     </form>
                 </main>
