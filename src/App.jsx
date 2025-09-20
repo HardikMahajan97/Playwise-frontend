@@ -1,8 +1,9 @@
 import './App.css'
-import React from 'react';
 import VendorSignup from "./Vendor/Authentication/VendorSignup.jsx"
 import VendorLogin from "./Vendor/Authentication/VendorLogin.jsx"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
+
 
 import VendorForgotPassword from "./Vendor/Authentication/VendorForgotPassword.jsx";
 import VendorVerification from "./Vendor/Authentication/VendorVerification.jsx";
@@ -16,7 +17,9 @@ import UserLogin from "./User/Authentication/UserLogin.jsx";
 import UserForgotPassword from "./User/Authentication/UserForgotPassword.jsx";
 import UserVerification from "./User/Authentication/UserVerification.jsx";
 import UserResetPassword from "./User/Authentication/UserResetPassword.jsx";
-import CourtDetails from "./User/pages/CourtDetails.jsx"
+import HallDetails from "./User/pages/HallDetails.jsx";
+import BookingDetails from "./User/pages/BookingDetails.jsx";
+import ChooseCourtPage from "./User/Booking/ChooseCourtPage.jsx";
 
 function App() {
 
@@ -38,12 +41,14 @@ function App() {
                 <Route path="/user/otp-form" element={<UserVerification/>} />
                 <Route path="/user/reset-password" element={<UserResetPassword />} />
 
-                <Route path="/user/home-page/:id" element={<UserHomePage />} />
-                <Route path="/user/court-details/:id/:hallId" element={<CourtDetails/>} />
+                <Route path="/user/home-page/:userId" element={<UserHomePage />} />
+                <Route path="/user/court-details/:userId/:hallId/:vendorId" element={<HallDetails/>} />
+                <Route path="/user/:userId/book/:hallId" element={<ChooseCourtPage/>} />
+                <Route path="/user/book" element={<BookingDetails/>} />
 
             </Routes>
         </BrowserRouter>
-
+        <Toaster position="top-center" />
     </>
   );
 

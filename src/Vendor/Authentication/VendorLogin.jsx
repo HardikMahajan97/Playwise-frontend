@@ -9,12 +9,15 @@ export default function VendorLogin(){
     });
     const navigate = useNavigate();
     const handleChange = (e) => {
+
         const {id, value} = e.target;
         setFormData((prev) => ({
             ...prev,
                 [id] : value,
         }));
+
     }
+    
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
@@ -32,7 +35,7 @@ export default function VendorLogin(){
                 navigate(`/vendor/home-page/${user.vendorID}`);
 
             }else{
-                alert("VendorLogin failed");
+                alert("Vendor Login failed");
             }
 
         }catch(err){

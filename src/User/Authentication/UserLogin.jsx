@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import showToast from "../../Utils/ShowToast.jsx";
 
 export default function VendorLogin(){
 
@@ -18,7 +19,6 @@ export default function VendorLogin(){
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
-            console.log("Print something dammit!");
             const response = await fetch("http://localhost:5000/user/login", {
                 method:"POST",
                 headers:{
@@ -31,6 +31,10 @@ export default function VendorLogin(){
             console.log(`This is user id fetched from the server ${user.id}`);
             if(response.ok){
                 alert("User logged in successfully");
+                showToast({
+                    message: "Your user Id is: being passed from the login page correctly: " + user.id,
+                    type: "success",
+                })
                 navigate(`/user/home-page/${user.id}`);
 
             }else{
@@ -85,13 +89,13 @@ export default function VendorLogin(){
                         <br/>
 
                         <button type={"submit"}
-                                className={"border-1  w-1/2 h-10 font-medium border-amber-700 rounded-lg bg-gradient-to-r from-teal-400 to-lime-500 hover:bg-gradient-to-bl transition"}> Login
+                                className={"border-1 ml-32 w-1/2 h-10 font-medium border-amber-700 rounded-lg bg-gradient-to-r from-teal-400 to-lime-500 hover:bg-gradient-to-bl transition"}> Login
                         </button>
 
                         {/*    Forgot Password*/}
                         <br/>
                         <div>
-                            <Link to="/user/forgot-password" className={"text-blue-800 hover:underline"}>Forgot Password?</Link>
+                            <Link to="/user/forgot-password" className={"text-blue-800 hover:underline ml-48"}>Forgot Password?</Link>
                         </div>
                     </form>
                 </main>
