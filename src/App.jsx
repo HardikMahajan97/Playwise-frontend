@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import VendorForgotPassword from "./Vendor/Authentication/VendorForgotPassword.jsx";
 import VendorVerification from "./Vendor/Authentication/VendorVerification.jsx";
 import VendorHomePage from "./Vendor/pages/Home Page/VendorHomePage.jsx";
-import CreateCourt from "./Vendor/pages/CreateCourt.jsx";
+import CreateHall from "./Vendor/pages/CreateHall.jsx";
 import VendorResetPassword from "./Vendor/Authentication/VendorResetPassword.jsx";
 
 import UserSignup from "./User/Authentication/UserSignup.jsx";
@@ -31,8 +31,8 @@ function App() {
                 <Route path="/vendor/login" element={<VendorLogin />} />
                 <Route path="/vendor/forgot-password" element={<VendorForgotPassword/>} />
                 <Route path="/vendor/otp-form" element={<VendorVerification/>} />
-                <Route path="/vendor/home-page/:id" element={<VendorHomePage/>} />
-                <Route path="/vendor/create-court/:id" element={<CreateCourt/>} />
+                <Route path="/vendor/home-page/:vendorId" element={<VendorHomePage/>} />
+                <Route path="/vendor/create-hall/:vendorId" element={<CreateHall/>} />
                 <Route path="/vendor/reset-password" element={<VendorResetPassword/> } />
 
                 <Route path="/user/signup" element={<UserSignup />} />

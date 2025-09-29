@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {useParams, useNavigate} from "react-router-dom";
+import showToast from '../../Utils/ShowToast.jsx';  
 
-const CreateCourt = () => {
+export default function CreateHall() {
 
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const CreateCourt = () => {
         city: "",
         state: "",
         country: "",
-        Name: "",
+        name: "",
         image: [""],
         slots: [""],
         price: "",
@@ -18,7 +19,7 @@ const CreateCourt = () => {
         matType: "",
         additionalInfo: "",
     });
-    const {id} = useParams();
+    const {vendorId, hallId} = useParams();
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -28,26 +29,28 @@ const CreateCourt = () => {
         e.preventDefault();
         console.log("Form Data:", formData);
         // Add submission logic here
-        if (!id) {
+        if (!vendorId || hallId) {
             alert("Vendor ID is missing!");
             return;
         }
         try{
-            const response = await fetch(`http://localhost:5000/home-vendor/${id}/create-court`, {
+            const response = await fetch(`http://localhost:5000/home-vendor/${vendorId}/create-hall`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body : JSON.stringify({...formData, vendorId: id}),
+                body : JSON.stringify({...formData, vendorId: vendorId}),
             });
             console.log(`The data after backend's response: ${response}`);
             const data = await response.json();
+            console.log(data);
             if(response.ok){
                 alert('You have successfully sent the request to add your Badminton Hall, please wait until we verify your details!' +
                     ' Your hall will be up and running soon. Thank you for your cooperation');
-                navigate(`/vendor-home-page/${id}`);
+                navigate(`/vendor/home-page/${vendorId}`);
             }
         }catch(e){
+            showToast(`Error occurred while creating hall: ${e.message}`, "error");
             alert(e.message);
         }
     };
@@ -112,7 +115,7 @@ const CreateCourt = () => {
                     <input
                         type="text"
                         name="Name"
-                        value={formData.Name}
+                        value={formData.name}
                         onChange={handleChange}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         required
@@ -230,5 +233,3 @@ const CreateCourt = () => {
         </div>
     );
 };
-
-export default CreateCourt;

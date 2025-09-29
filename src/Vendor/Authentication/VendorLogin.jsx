@@ -32,7 +32,9 @@ export default function VendorLogin(){
             const user = await response.json();
             if(response.ok){
                 alert("Logged in successfully");
-                navigate(`/vendor/home-page/${user.vendorID}`);
+                const vendorId = user.vendorID;
+                console.log(vendorId);
+                navigate(`/vendor/home-page/${vendorId}`);
 
             }else{
                 alert("Vendor Login failed");

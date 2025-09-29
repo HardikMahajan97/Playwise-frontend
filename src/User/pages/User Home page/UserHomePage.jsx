@@ -13,7 +13,7 @@ export default function UserHomePage() {
         alert(`Viewing details for hall ID: ${hallId} and vendor ID: ${vendorId}`);
         navigate(`/user/court-details/${userId}/${hallId}/${vendorId}`);
     };
-
+  
     const getAmenityIcon = (amenity) => {
         switch (amenity) {
             case 'wifi': return <Wifi className="w-4 h-4 text-gray-400" />;

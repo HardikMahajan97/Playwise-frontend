@@ -153,7 +153,7 @@
 //
 // export default HallDetails;
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
 
