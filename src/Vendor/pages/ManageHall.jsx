@@ -108,18 +108,18 @@ export default function ManageHall() {
                 body: JSON.stringify(updateData),
             });
 
-            const data = await response.json();
+            await response.json();
             console.log(response.ok);
         
             if (response.ok) {
-                showToast('Hall updated successfully!', 'success');
+                showToast({ message: 'Hall updated successfully!', type: 'success'});
                 // Optionally navigate back or stay on the same page
                 // navigate(`/vendor/home-page/${vendorId}`);
             } else {
                 showToast('Failed to update hall', "error");
             }
         } catch (error) {
-            showToast(`Error updating hall: ${error.message}`, "error");
+            showToast({message: `Error updating hall: ${error.message}`, type: "error"});
             console.error('Error:', error);
         } finally {
             setUpdating(false);
@@ -130,14 +130,18 @@ export default function ManageHall() {
     const handleUpdateCourts = () => {
         // Navigate to update courts page
         navigate(`/vendor/hall/${hallId}/update-courts`);
-        showToast("Redirecting to update courts page...", "info");
+        showToast({message: "Redirecting to update courts page...", type: "info"});
     };
 
     const handleAddCourts = () => {
         // Navigate to add courts page
-        navigate(`/vendor/hall/${hallId}/add-courts`);
-        showToast("Redirecting to add courts page...", "info");
+        navigate(`/vendor/${vendorId}/hall/${hallId}/add-courts`);
+        showToast({message: "Redirecting to add courts page...", type: "info"});
     };
+
+    const handleGoBack = () => {
+        navigate(`/vendor/home-page/${vendorId}`); // Go back to the previous page
+    }
 
     if (loading) {
         return (
@@ -323,6 +327,17 @@ export default function ManageHall() {
                         }`}
                     >
                         {updating ? 'Updating...' : 'Update Hall Details'}
+                    </button>
+                </div>
+
+
+                <div className="mt-6">
+                    <button
+                        type="button"
+                        onClick={handleGoBack}
+                        className={`w-full text-white py-2 px-4 rounded-md transition-colors bg-blue-500 hover:bg-blue-600`}
+                    >
+                        {'Go Back'}
                     </button>
                 </div>
             </form>

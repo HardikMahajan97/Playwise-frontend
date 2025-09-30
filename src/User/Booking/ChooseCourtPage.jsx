@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
 
 const ChooseCourtPage = () => {
-    const { vendorId, hallId } = useParams();
+    const { vendorId, hallId, userId } = useParams();
     const [hall, setHall] = useState(null);
     const [courts, setCourts] = useState([]);
     const [selectedDate, setSelectedDate] = useState("");
@@ -17,8 +17,23 @@ const ChooseCourtPage = () => {
             try {
                 const response = await fetch(`http://localhost:5000/halls/${vendorId}/${hallId}/get-all-courts`);
                 const json = await response.json();
-                setHall(json.data.hall);
-                setCourts(json.data.courts || []);
+                console.log(json.data);
+                if (!response.ok) {
+                    showToast({ message: `Error fetching hall details: ${response.statusText}`, type: "error-dark" });
+                    setLoading(false);
+                    return;
+                }
+                if (json.success && json.data && json.data.length > 0) {
+                    // Extract hall data from first court (all courts have same hall data)
+                    const hallData = json.data[0].hallId;  // This is the populated hall object!
+                    setHall(hallData);
+                    setCourts(json.data);
+                    
+                    console.log("Hall data:", hallData);
+                    console.log("Courts data:", json.data);
+                } else {
+                    showToast({ message: "No courts found for this hall", type: "error-dark" });
+                }
             } catch (error) {
                 showToast({ message: error.message, type: "error-dark" });
             } finally {
@@ -27,7 +42,7 @@ const ChooseCourtPage = () => {
         };
 
         fetchHallDetails();
-    });
+    }, []);
 
     const handleAddToCart = (court) => {
         if (!selectedDate || !selectedSlot) {
@@ -41,7 +56,7 @@ const ChooseCourtPage = () => {
         );
 
         if (existingItem) {
-            showToast({ message: `Court ${court.name} is already in your cart for this slot!`, type: "error-dark" });
+            showToast({ message: `Court ${court.number} is already in your cart for this slot!`, type: "error-dark" });
             return;
         }
 
@@ -50,12 +65,12 @@ const ChooseCourtPage = () => {
             courtName: court.name,
             slot: selectedSlot,
             date: selectedDate,
-            price: hall.pricePerHour,
-            hallName: hall.name,
+            price: court.hallId.pricePerHour,
+            hallName: court.hallId.name,
         };
 
         setCart((prev) => [...prev, bookingItem]);
-        showToast({ message: `Court ${court.name} added to cart!`, type: "success-dark" });
+        showToast({ message: `Court ${court.number} added to cart!`, type: "success-dark" });
     };
 
     const removeFromCart = (index) => {
@@ -64,7 +79,8 @@ const ChooseCourtPage = () => {
     };
 
     const proceedToCheckout = () => {
-        navigate(`/user/${vendorId}/checkout`, { state: { cart, hall } });
+        console.log("In proceedToCheckout");
+        navigate(`/user/${userId}/${hallId}/checkout`, { state: { cart, hall } });
     };
 
     const getTotalPrice = () => {
@@ -175,14 +191,16 @@ const ChooseCourtPage = () => {
                                             key={court._id} 
                                             className="bg-gray-900 border-2 border-orange-300/20 p-4 rounded-lg hover:border-orange-300/40 transition-all"
                                         >
-                                            <div className="flex justify-between items-start mb-3">
+                                            <div className="flex justify-between items-start mb-3"> 
                                                 <div>
-                                                    <h3 className="text-lg font-semibold text-white">{court.name}</h3>
+                                                    <h3 className="text-lg font-semibold text-white">Court: {court.number}</h3>
                                                     <p className="text-gray-400 text-sm">
-                                                        {court.description || "Premium badminton court"}
+                                                        {court.hallId.matType} Mat  {/* Accessing populated data! */}
                                                     </p>
                                                 </div>
-                                                <span className="text-orange-300 font-semibold">₹{hall?.pricePerHour}/hr</span>
+                                                <span className="text-blue-300 font-semibold">
+                                                    ₹{court.hallId.pricePerHour}/hr  {/* Accessing populated data! */}
+                                                </span>
                                             </div>
                                             
                                             <button

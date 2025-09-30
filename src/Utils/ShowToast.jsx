@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 
-export default function showToast({ message, type }) {
+export const showToast = ({ message, type }) => {
     if (type === 'success') toast.success(message);
     else if (type === 'loading') toast.loading(message);
     else if (type === 'error') toast.error(message);
@@ -21,3 +21,6 @@ export default function showToast({ message, type }) {
     else if (type === 'default') toast(message); // default case
     else toast.error(message); // default
 }
+
+
+export default showToast;

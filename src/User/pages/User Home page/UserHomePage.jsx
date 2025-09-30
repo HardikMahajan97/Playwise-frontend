@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation  } from 'react-router-dom';
-import { MapPin, DollarSign, Wifi, Car, Users, Shield, Fan, Coffee, Gamepad } from 'lucide-react';
-import showToast from '../../../Utils/ShowToast.jsx';
+import { MapPin, Wifi, Car, Users, Shield, Fan, Coffee, Gamepad, IndianRupee } from 'lucide-react';
+import {showToast} from '../../../Utils/ShowToast';
 
 export default function UserHomePage() {
     const [listings, setListings] = useState([]);
@@ -10,10 +10,15 @@ export default function UserHomePage() {
     const location = useLocation();
 
     const handleViewDetails = (hallId, vendorId) => {
-        alert(`Viewing details for hall ID: ${hallId} and vendor ID: ${vendorId}`);
+        showToast({message: "Navigating to Hall Details", type: "info"});
         navigate(`/user/court-details/${userId}/${hallId}/${vendorId}`);
     };
-  
+
+    const handleMyBookings = () => {
+        showToast({message: "Navigating to My Bookings", type: "info"});
+        navigate(`/user/my-bookings/${userId}`);
+    }
+
     const getAmenityIcon = (amenity) => {
         switch (amenity) {
             case 'wifi': return <Wifi className="w-4 h-4 text-gray-400" />;
@@ -68,7 +73,7 @@ export default function UserHomePage() {
                             </h1>
                         </div>
 
-                        <button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-black font-semibold px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30">
+                        <button onClick={handleMyBookings} className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-black font-semibold px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30">
                             My Bookings
                         </button>
                     </div>
@@ -120,10 +125,10 @@ export default function UserHomePage() {
                         </div>
 
                         <div className="flex items-center space-x-2 mb-4">
-                            <DollarSign className="w-4 h-4 text-orange-400" />
+                            <IndianRupee className="w-4 h-4 text-orange-400" />
                             <span className="text-md font-bold text-white">
-                            ₹{listing.pricePerHour}
-              </span>
+                            {listing.pricePerHour || 'N/A'}
+                            </span>
                             <span className="text-sm text-gray-400">/hour</span>
                         </div>
 

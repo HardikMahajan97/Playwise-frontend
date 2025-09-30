@@ -11,6 +11,7 @@ import VendorHomePage from "./Vendor/pages/Home Page/VendorHomePage.jsx";
 import CreateHall from "./Vendor/pages/CreateHall.jsx";
 import VendorResetPassword from "./Vendor/Authentication/VendorResetPassword.jsx";
 import ManageHall from "./Vendor/pages/ManageHall.jsx";
+import CreateCourt from './Vendor/pages/CreateCourt.jsx';
 
 import UserSignup from "./User/Authentication/UserSignup.jsx";
 import UserHomePage from "./User/pages/User Home page/UserHomePage.jsx";
@@ -19,8 +20,11 @@ import UserForgotPassword from "./User/Authentication/UserForgotPassword.jsx";
 import UserVerification from "./User/Authentication/UserVerification.jsx";
 import UserResetPassword from "./User/Authentication/UserResetPassword.jsx";
 import HallDetails from "./User/pages/HallDetails.jsx";
-import BookingDetails from "./User/pages/BookingDetails.jsx";
 import ChooseCourtPage from "./User/Booking/ChooseCourtPage.jsx";
+
+import CheckoutPage from "./User/Booking/CheckoutPage.jsx";
+import BookingConfirmation from './User/Booking/BookingConfirmation.jsx';
+import MyBookings from "./User/pages/User Home page/MyBookings.jsx";
 
 function App() {
 
@@ -36,6 +40,7 @@ function App() {
                 <Route path="/vendor/create-hall/:vendorId" element={<CreateHall/>} />
                 <Route path="/vendor/reset-password" element={<VendorResetPassword/> } />
                 <Route path="/vendor/:vendorId/hall/:hallId/manage" element={<ManageHall/>} />
+                <Route path="/vendor/:vendorId/hall/:hallId/add-courts" element={<CreateCourt/>} />
 
                 <Route path="/user/signup" element={<UserSignup />} />
                 <Route path="/user/login" element={<UserLogin />} />
@@ -44,9 +49,11 @@ function App() {
                 <Route path="/user/reset-password" element={<UserResetPassword />} />
 
                 <Route path="/user/home-page/:userId" element={<UserHomePage />} />
+                <Route path="/user/my-bookings/:userId" element={<MyBookings/>} />
                 <Route path="/user/court-details/:userId/:hallId/:vendorId" element={<HallDetails/>} />
                 <Route path="/user/:userId/book/:hallId" element={<ChooseCourtPage/>} />
-                <Route path="/user/book" element={<BookingDetails/>} />
+                <Route path="/user/:userId/:hallId/checkout" element={<CheckoutPage/>} />
+                <Route path="/user/:userId/booking-success" element={<BookingConfirmation/>} />
 
             </Routes>
         </BrowserRouter>
