@@ -1,12 +1,12 @@
 import toast from 'react-hot-toast';
 
-export default function showToast({ message, type = 'error' }) {
+export default function showToast({ message, type }) {
     if (type === 'success') toast.success(message);
     else if (type === 'loading') toast.loading(message);
     else if (type === 'error') toast.error(message);
     else if( type === 'info') toast(message, { icon: 'ℹ️' });
     else if (type === 'warning') toast.warning(message);
-    else if (type === 'custom') toast.custom((t) => (
+    else if (type === 'custom') toast.custom(() => (
         <div className="custom-toast">
             {message}
         </div>

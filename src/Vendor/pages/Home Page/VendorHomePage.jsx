@@ -43,9 +43,9 @@ export default function VendorHomePage() {
     };
 
     // TODO: Implement manage court functionality
-    // const handleManageCourt = (listingId) => {
-    //     navigate(`/vendor/${vendorId}/hall/${listingId}/manage`);
-    // };
+    const handleManageCourt = (hallId) => {
+        navigate(`/vendor/${vendorId}/hall/${hallId}/manage`);
+    };
 
     if (loading) {
         return (
@@ -164,7 +164,7 @@ export default function VendorHomePage() {
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-2xl font-bold text-orange-300">₹{listing.price || 0}</div>
+                                        <div className="text-2xl font-bold text-orange-300">₹{listing.pricePerHour || 0}</div>
                                         <div className="text-gray-400 text-sm">per hour</div>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@ export default function VendorHomePage() {
                                         <span className="text-green-400 font-medium">Active</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-gray-400">Today's Bookings:</span>
+                                        <span className="text-gray-400">Today&apos;s Bookings:</span>
                                         <span className="text-white font-medium">0</span>
                                     </div>
                                 </div>

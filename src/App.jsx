@@ -10,6 +10,7 @@ import VendorVerification from "./Vendor/Authentication/VendorVerification.jsx";
 import VendorHomePage from "./Vendor/pages/Home Page/VendorHomePage.jsx";
 import CreateHall from "./Vendor/pages/CreateHall.jsx";
 import VendorResetPassword from "./Vendor/Authentication/VendorResetPassword.jsx";
+import ManageHall from "./Vendor/pages/ManageHall.jsx";
 
 import UserSignup from "./User/Authentication/UserSignup.jsx";
 import UserHomePage from "./User/pages/User Home page/UserHomePage.jsx";
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/vendor/home-page/:vendorId" element={<VendorHomePage/>} />
                 <Route path="/vendor/create-hall/:vendorId" element={<CreateHall/>} />
                 <Route path="/vendor/reset-password" element={<VendorResetPassword/> } />
+                <Route path="/vendor/:vendorId/hall/:hallId/manage" element={<ManageHall/>} />
 
                 <Route path="/user/signup" element={<UserSignup />} />
                 <Route path="/user/login" element={<UserLogin />} />
