@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {APP_BASE_URL} from '../../config.js';
+import {API_BASE_URL} from '../../config.js';
 
 export default function UserVerification(){
     const [Otp, setOtp] = useState("");
@@ -14,7 +14,7 @@ export default function UserVerification(){
         e.preventDefault();
         let response;
         try{
-            response = await fetch(`${APP_BASE_URL}/user/verify`, {
+            response = await fetch(`${API_BASE_URL}/user/verify`, {
                 method: "POST",
                 headers:{
                     'Content-Type': 'application/json'

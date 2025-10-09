@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
-import { APP_BASE_URL } from '../../config.js';
+import { API_BASE_URL } from '../../config.js';
 
 const CheckoutPage = () => {
     const location = useLocation();
@@ -113,7 +113,7 @@ const CheckoutPage = () => {
 
                 console.log(`Processing booking ${i + 1}/${cart.length}:`, bookingData);
 
-                const response = await fetch(`${APP_BASE_URL}/booking/${userId}/create-booking/${hall._id}/${item.courtId}`, {
+                const response = await fetch(`${API_BASE_URL}/booking/${userId}/create-booking/${hall._id}/${item.courtId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

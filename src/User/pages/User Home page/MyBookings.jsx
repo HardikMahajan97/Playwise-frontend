@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import showToast from '../../../Utils/ShowToast.jsx';
-import { APP_BASE_URL } from '../../../config.js';
+import { API_BASE_URL } from '../../../config.js';
 
 const MyBookings = () => {
     const { userId } = useParams();
@@ -21,7 +21,7 @@ const MyBookings = () => {
                     return;
                 }
 
-                const response = await fetch(`${APP_BASE_URL}/booking/${userId}/get-my-bookings`);
+                const response = await fetch(`${API_BASE_URL}/booking/${userId}/get-my-bookings`);
                 const json = await response.json();
 
                 if (!response.ok) {

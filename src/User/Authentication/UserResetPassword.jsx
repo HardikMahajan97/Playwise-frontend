@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {APP_BASE_URL} from '../../config.js';
+import {API_BASE_URL} from '../../config.js';
 import showToast from "../../Utils/ShowToast.jsx";
 
 export default function UserResetPassword(){
@@ -21,7 +21,7 @@ export default function UserResetPassword(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`${APP_BASE_URL}/user/changePassword`, {
+            const response = await fetch(`${API_BASE_URL}/user/changePassword`, {
                 method : "POST",
                 headers : {
                     'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
-import { APP_BASE_URL } from '../../config.js';
+import { API_BASE_URL } from '../../config.js';
 
 const ChooseCourtPage = () => {
     const { vendorId, hallId, userId } = useParams();
@@ -16,7 +16,7 @@ const ChooseCourtPage = () => {
     useEffect(() => {
         const fetchHallDetails = async () => {
             try {
-                const response = await fetch(`${APP_BASE_URL}/halls/${vendorId}/${hallId}/get-all-courts`);
+                const response = await fetch(`${API_BASE_URL}/halls/${vendorId}/${hallId}/get-all-courts`);
                 const json = await response.json();
                 if (!response.ok) {
                     showToast({ message: `Error fetching hall details: ${response.statusText}`, type: "error-dark" });
