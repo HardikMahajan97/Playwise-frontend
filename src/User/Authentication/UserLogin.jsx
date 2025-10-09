@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
 import { API_BASE_URL } from '../../config.js';
 
-export default function VendorLogin(){
+export default function UserLogin(){
 
     const [form, setFormData] = useState({
         username : '',
