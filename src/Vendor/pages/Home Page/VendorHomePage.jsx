@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from '../../../Utils/ShowToast.jsx';
-import API_BASE_URL from '../../../config/api.js';
+import API_BASE_URL from '../../../config.js';
 
 export default function VendorHomePage() {
     const [listings, setListings] = useState([]);

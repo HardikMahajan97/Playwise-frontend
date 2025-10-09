@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import API_BASE_URL from "../../config/api.js";
+import API_BASE_URL from "../../config.js";
 import showToast from "../../Utils/ShowToast.jsx";
 
 export default function VendorResetPassword(){
