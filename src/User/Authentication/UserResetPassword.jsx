@@ -1,5 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import {React, useState} from "react";
+import {useState} from "react";
+import {APP_BASE_URL} from '../../config.js';
+import showToast from "../../Utils/ShowToast.jsx";
 
 export default function UserResetPassword(){
     const navigate = useNavigate();
@@ -19,24 +21,23 @@ export default function UserResetPassword(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch("http://localhost:5000/user/changePassword", {
+            const response = await fetch(`${APP_BASE_URL}/user/changePassword`, {
                 method : "POST",
                 headers : {
                     'Content-Type': 'application/json'
                 },
                 body:JSON.stringify({newPassword, confirmPassword, username}),
             });
-            console.log("Response got");
             const data = await response.json();
-            console.log("Saved in dataa");
             const id = data.userID;
-            console.log(`Got the id ${id}`);
-            console.log("Response is " + data);
             if(!response.ok){
                 alert("Response not ok");
             }
             if(response.ok){
-                alert(`Password reset and logged in successfully `);
+                showToast({
+                    message: "Password reset successful",
+                    type: "success"
+                })
                 navigate(`/user/home-page/${id}`);
             }
         }catch(e){

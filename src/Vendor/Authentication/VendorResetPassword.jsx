@@ -1,5 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import {React, useState} from "react";
+import {useState} from "react";
+import API_BASE_URL from "../../config/api.js";
+import showToast from "../../Utils/ShowToast.jsx";
 
 export default function VendorResetPassword(){
     const navigate = useNavigate();
@@ -19,25 +21,22 @@ export default function VendorResetPassword(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch("http://localhost:5000/vendor/changePassword", {
+            const response = await fetch(`${API_BASE_URL}/vendor/changePassword`, {
                 method : "POST",
                 headers : {
                     'Content-Type': 'application/json'
                 },
                 body:JSON.stringify({newPassword, confirmPassword, username}),
             });
-            console.log("Response got");
-            console.log("Saved in data");
+
             const data = await response.json(); // Parse the JSON response
             const {id} = data.vendor;
-
-            console.log(`Got the id ${id}`);
 
             if(!response.ok){
                 alert("Response not ok");
             }
             if(response.ok){
-                alert(`Password reset and logged in successfully `);
+                showToast("Password changed successfully", "success");
                 navigate(`/vendor/home-page/${id}`);
             }
         }catch(e){

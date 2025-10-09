@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
+import { APP_BASE_URL } from '../../config.js';
 
 const ChooseCourtPage = () => {
     const { vendorId, hallId, userId } = useParams();
@@ -15,22 +16,17 @@ const ChooseCourtPage = () => {
     useEffect(() => {
         const fetchHallDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/halls/${vendorId}/${hallId}/get-all-courts`);
+                const response = await fetch(`${APP_BASE_URL}/halls/${vendorId}/${hallId}/get-all-courts`);
                 const json = await response.json();
-                console.log(json.data);
                 if (!response.ok) {
                     showToast({ message: `Error fetching hall details: ${response.statusText}`, type: "error-dark" });
                     setLoading(false);
                     return;
                 }
                 if (json.success && json.data && json.data.length > 0) {
-                    // Extract hall data from first court (all courts have same hall data)
                     const hallData = json.data[0].hallId;  // This is the populated hall object!
                     setHall(hallData);
                     setCourts(json.data);
-                    
-                    console.log("Hall data:", hallData);
-                    console.log("Courts data:", json.data);
                 } else {
                     showToast({ message: "No courts found for this hall", type: "error-dark" });
                 }

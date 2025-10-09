@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import showToast from "../../Utils/ShowToast.jsx";
+import { API_BASE_URL } from '../../config.js';
 
 export default function VendorLogin(){
 
@@ -19,7 +20,7 @@ export default function VendorLogin(){
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
-            const response = await fetch("http://localhost:5000/user/login", {
+            const response = await fetch(`${API_BASE_URL}/user/login`, {
                 method:"POST",
                 headers:{
                     'Content-Type': 'application/json',
@@ -28,17 +29,18 @@ export default function VendorLogin(){
             });
 
             const user = await response.json();
-            console.log(`This is user id fetched from the server ${user.id}`);
             if(response.ok){
-                alert("User logged in successfully");
                 showToast({
-                    message: "Your user Id is: being passed from the login page correctly: " + user.id,
+                    message: "User logged in successfully",
                     type: "success",
                 })
                 navigate(`/user/home-page/${user.id}`);
 
             }else{
-                alert("User login failed");
+                showToast({
+                    message: "Login failed: " + user.message,
+                    type: "error",
+                });
             }
 
         }catch(err){

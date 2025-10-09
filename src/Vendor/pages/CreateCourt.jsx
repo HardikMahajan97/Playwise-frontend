@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from '../../Utils/ShowToast.jsx';
+import { API_BASE_URL } from '../../config.js';
 
 export default function CreateCourt() {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function CreateCourt() {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/halls/${vendorId}/${hallId}/courts`, {
+            const response = await fetch(`${API_BASE_URL}/halls/${vendorId}/${hallId}/courts`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,8 +50,7 @@ export default function CreateCourt() {
                 }),
             });
 
-            const data = await response.json();
-            console.log(data);  
+            await response.json();
             if (response.ok) {
                 showToast({message: 'Court added successfully!', type: 'success'});
                 setFormData({ number: "" }); // Reset form

@@ -1,5 +1,7 @@
-import {React, useEffect, useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import API_BASE_URL from "../../config/api";
+
 export default function VendorVerification(){
     const [Otp, setOtp] = useState("");
 
@@ -12,7 +14,7 @@ export default function VendorVerification(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch("http://localhost:5000/vendor/verify", {
+            const response = await fetch(`${API_BASE_URL}/vendor/verify`, {
                 method: "POST",
                 headers:{
                     'Content-Type': 'application/json'

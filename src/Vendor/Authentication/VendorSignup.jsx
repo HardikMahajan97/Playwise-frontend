@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import {useState} from "react";
+import API_BASE_URL from "../../config/api";
 
 export default function VendorSignup(){
     const [formdata, setformData] = useState({
@@ -22,14 +23,14 @@ export default function VendorSignup(){
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch("http://localhost:5000/vendor/signup", {
+            const response = await fetch(`${API_BASE_URL}/vendor/signup`, {
                 method:"POST",
                 headers:{
                     'Content-Type': 'application/json',
                 },
                 body:JSON.stringify(formdata),
             });
-            const result = await response.json();
+            await response.json();
             if(response.ok){
                 alert("Vendor Signup Successfull");
             }

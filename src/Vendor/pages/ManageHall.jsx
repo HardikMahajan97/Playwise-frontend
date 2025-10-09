@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from '../../Utils/ShowToast.jsx';
+import { API_BASE_URL } from '../../config.js';
 
 export default function ManageHall() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function ManageHall() {
             }
 
             try {
-                const response = await fetch(`http://localhost:5000/home-vendor/${vendorId}/${hallId}`, {
+                const response = await fetch(`${API_BASE_URL}home-vendor/${vendorId}/${hallId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -100,7 +101,7 @@ export default function ManageHall() {
                 matType: formData.matType
             };
 
-            const response = await fetch(`http://localhost:5000/home-vendor/${vendorId}/hall/update/${hallId}`, {
+            const response = await fetch(`${API_BASE_URL}/home-vendor/${vendorId}/hall/update/${hallId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

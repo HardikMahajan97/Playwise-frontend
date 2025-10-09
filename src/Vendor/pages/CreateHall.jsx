@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from '../../Utils/ShowToast.jsx';  
+import { API_BASE_URL } from '../../config.js';
 
 export default function CreateHall() {
     const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function CreateHall() {
                 matType: formData.matType
             };
             
-            const response = await fetch(`http://localhost:5000/home-vendor/${vendorId}/create-hall`, {
+            const response = await fetch(`${API_BASE_URL}/home-vendor/${vendorId}/create-hall`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

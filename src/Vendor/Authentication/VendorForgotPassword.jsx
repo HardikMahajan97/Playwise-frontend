@@ -1,5 +1,6 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from '../../config.js';
 
 export default function VendorForgotPassword() {
     const [contact, setContact] = useState("");
@@ -35,7 +36,7 @@ export default function VendorForgotPassword() {
 
             // console.log('Sending request with number:', formattedNumber);
 
-            const response = await fetch(`http://localhost:5000/vendor/forgotPassword`, {
+            const response = await fetch(`${API_BASE_URL}/vendor/forgotPassword`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,8 +50,8 @@ export default function VendorForgotPassword() {
                 // console.error('Server response:', errorText);
                 throw new Error(`Server responded with status ${response.status}: ${errorText}`);
             }
+            await response.json();
 
-            const data = await response.json();
             // console.log('Server response:', data);
             navigate("/vendor/otp-form");
             alert('OTP sent successfully to your contact!');

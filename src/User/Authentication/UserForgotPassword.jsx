@@ -1,5 +1,7 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from '../../config.js';
+import showToast from "../../Utils/ShowToast.jsx";
 
 export default function UserForgotPassword() {
     const [contact, setContact] = useState("");
@@ -35,7 +37,7 @@ export default function UserForgotPassword() {
 
             // console.log('Sending request with number:', formattedNumber);
 
-            const response = await fetch(`http://localhost:5000/user/forgotPassword`, {
+            const response = await fetch(`${API_BASE_URL}/user/forgotPassword`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,14 +52,16 @@ export default function UserForgotPassword() {
                 throw new Error(`Server responded with status ${response.status}: ${errorText}`);
             }
 
-            const data = await response.json();
+            await response.json();
             // console.log('Server response:', data);
             navigate("/user/otp-form");
             alert('OTP sent successfully to your contact!');
 
         } catch (error) {
             console.error('Error details:', error);
-            alert(`Error occurred: ${error.message}`);
+            showToast({message: `Error occurred: ${error.message}`
+                , type: "error"
+            });
         }
     };
 

@@ -1,3 +1,3 @@
-const API_BASE_URL = 'http://43.204.148.162/'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default API_BASE_URL;

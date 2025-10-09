@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation  } from 'react-router-dom';
 import { MapPin, Wifi, Car, Users, Shield, Fan, Coffee, Gamepad, IndianRupee } from 'lucide-react';
 import {showToast} from '../../../Utils/ShowToast';
+import {APP_BASE_URL} from '../../../config.js';
 
 export default function UserHomePage() {
     const [listings, setListings] = useState([]);
@@ -35,7 +36,7 @@ export default function UserHomePage() {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/listings/${userId}`);
+                const response = await fetch(`${APP_BASE_URL}/listings/${userId}`);
                 const result = await response.json();
 
                 if (result.success && Array.isArray(result.halls)) {

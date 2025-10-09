@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import showToast from '../../../Utils/ShowToast.jsx';
+import API_BASE_URL from '../../../config/api.js';
 
 export default function VendorHomePage() {
     const [listings, setListings] = useState([]);
@@ -15,7 +16,7 @@ export default function VendorHomePage() {
             setLoading(true);
             try {
                 console.log(vendorId);
-                const response = await fetch(`http://localhost:5000/home-vendor/${vendorId}`);
+                const response = await fetch(`${API_BASE_URL}/home-vendor/${vendorId}`);
                 const data = await response.json();
 
                 // Check if the response is array or not, if not then destructure the values in the object to be passed on as arrays.

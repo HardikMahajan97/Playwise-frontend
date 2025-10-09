@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { API_BASE_URL } from '../../config.js';
 
 export default function UserSignup(){
     const [formdata, setformData] = useState({
@@ -23,7 +24,7 @@ export default function UserSignup(){
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch("http://localhost:5000/user/signup", {
+            const response = await fetch(`${API_BASE_URL}/user/signup`, {
                 method:"POST",
                 headers:{
                     'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ export default function UserSignup(){
             <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 p-6">
                 {/* Header */}
                 <header className="w-full text-center py-4 text-white font-bold text-2xl">
-                    <h1>Let&#39;s Onboard to PlayWise!</h1>
+                    <h1> Welcome to PlayWise!</h1>
                 </header>
 
                 {/* Main VendorSignup Section */}
