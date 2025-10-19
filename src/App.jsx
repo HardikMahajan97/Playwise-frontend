@@ -21,10 +21,10 @@ import UserVerification from "./User/Authentication/UserVerification.jsx";
 import UserResetPassword from "./User/Authentication/UserResetPassword.jsx";
 import HallDetails from "./User/pages/HallDetails.jsx";
 import ChooseCourtPage from "./User/Booking/ChooseCourtPage.jsx";
-
 import CheckoutPage from "./User/Booking/CheckoutPage.jsx";
 import BookingConfirmation from './User/Booking/BookingConfirmation.jsx';
 import MyBookings from "./User/pages/User Home page/MyBookings.jsx";
+import LandingPage from "./LandingPage.jsx";
 
 function App() {
 
@@ -32,6 +32,7 @@ function App() {
     <>
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={<LandingPage />} />
                 <Route path="/vendor/signup" element={<VendorSignup />} />
                 <Route path="/vendor/login" element={<VendorLogin />} />
                 <Route path="/vendor/forgot-password" element={<VendorForgotPassword/>} />
