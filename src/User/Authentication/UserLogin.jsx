@@ -44,6 +44,7 @@ export default function UserLogin(){
             }
 
         }catch(err){
+            console.error("Login error: ", err);
             alert(`Some Error occurred. It says: ${err.message}`);
         }
     };
