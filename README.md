@@ -1,8 +1,111 @@
-# React + Vite
+# PlayWise Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+PlayWise is a badminton court booking system that allows users to search for badminton courts, check availability, and book courts online.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository contains the frontend of the application built using React.
+
+---
+
+## Tech Stack
+
+- React
+- React Router
+- Axios
+- CSS
+- JavaScript
+
+---
+
+## Features
+
+- User Login and Registration
+- Home Page
+- Browse Courts
+- Court Details
+- Book a Court
+- Booking Confirmation
+- Responsive User Interface
+
+---
+
+## Project Structure
+
+```
+frontend/
+│── public/
+│── src/
+│   ├── components/
+│   ├── pages/
+│   ├── context/
+│   ├── services/
+│   ├── assets/
+│   ├── App.js
+│   └── index.js
+│── package.json
+```
+
+---
+
+## Installation
+
+1. Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+2. Navigate to frontend folder
+
+```bash
+cd frontend
+```
+
+3. Install dependencies
+
+```bash
+npm install
+```
+
+4. Create a `.env` file if required.
+
+Example:
+
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
+
+5. Start the application
+
+```bash
+npm start
+```
+
+---
+
+## Available Pages
+
+- Home
+- Login
+- Register
+- Browse Courts
+- Booking
+- My Bookings
+- Profile
+
+---
+
+## Future Enhancements
+
+- Dark Mode
+- Court Search and Filters
+- Payment Gateway
+- Notifications
+- Better UI/UX
+
+---
+
+## Authors
+
+Developed as a college mini project.
